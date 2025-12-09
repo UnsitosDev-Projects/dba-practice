@@ -5,6 +5,9 @@ Proyecto de práctica basado en arquitectura de microservicios utilizando Spring
 > [!IMPORTANT]
 > **Para los compañeros del equipo:** Simplemente clonen este repositorio y desarrollen su microservicio aquí. **NO configuren nada relacionado con Eureka, Gateway o configuraciones de integración.** Yo me encargaré de toda la configuración necesaria para que su microservicio se integre correctamente a la aplicación.
 
+> [!WARNING]
+> **Flujo de trabajo con Git Flow:** Este proyecto utiliza Git Flow como estrategia de ramificación. **Todos los desarrollos deben realizarse en la rama `dev`**. NO trabajen directamente en `main`. Creen sus ramas de feature desde `dev` y hagan merge de regreso a `dev`.
+
 ## Descripción
 
 Esta es una aplicación distribuida que implementa el patrón de arquitectura de microservicios. Los microservicios son un enfoque arquitectónico donde una aplicación se construye como un conjunto de servicios pequeños e independientes que se comunican entre sí a través de APIs.
