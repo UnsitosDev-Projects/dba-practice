@@ -1,0 +1,6 @@
+spring:
+    application:
+        name: dba-eureka
+    config:
+        import: optonal:configserver:http://localhost:8888
+# spring.application.name=dba-eureka
