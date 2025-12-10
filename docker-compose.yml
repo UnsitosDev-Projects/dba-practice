@@ -4,8 +4,8 @@ services:
   # Config Server
   config-server:
     build:
-      context: ./dba-config
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: dba-config/Dockerfile
     container_name: config-server
     ports:
       - "8888:8888"
@@ -21,8 +21,8 @@ services:
   # Eureka Server
   eureka-server:
     build:
-      context: ./dba-eureka
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: dba-eureka/Dockerfile
     container_name: eureka-server
     ports:
       - "8761:8761"
@@ -43,8 +43,8 @@ services:
   # API Gateway
   gateway:
     build:
-      context: ./dba-gateway
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: dba-gateway/Dockerfile
     container_name: gateway
     ports:
       - "8080:8080"
@@ -69,8 +69,8 @@ services:
   # Professor Service
   professor-service:
     build:
-      context: ./dba-professor
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: dba-professor/Dockerfile
     container_name: professor-service
     ports:
       - "8081:8081"

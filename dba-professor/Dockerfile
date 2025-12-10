@@ -3,13 +3,13 @@ FROM maven:3.9.9-eclipse-temurin-21-alpine AS build
 WORKDIR /app
 
 # Copy pom file
-COPY pom.xml .
+COPY dba-professor/pom.xml .
 
 # Download dependencies
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B || true
 
 # Copy source code
-COPY src ./src
+COPY dba-professor/src ./src
 
 # Build the application
 RUN mvn clean package -DskipTests
