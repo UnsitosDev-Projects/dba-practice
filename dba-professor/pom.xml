@@ -6,12 +6,12 @@
   		<groupId>com.unsis.microservices</groupId>
   		<artifactId>dba-practice</artifactId>
   		<version>1.0-SNAPSHOT</version>
-  		<packaging>pom</packaging>
 	</parent>
 	<groupId>com.unsis</groupId>
 	<artifactId>dba-professor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dba-professor</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<lombok.version>1.18.34</lombok.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -72,6 +73,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
