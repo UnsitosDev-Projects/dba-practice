@@ -26,6 +26,7 @@
     <module>dba-config</module>
     <module>dba-eureka</module>
     <module>dba-gateway</module>
+    <module>dba-professor</module>
   </modules>
 
   <dependencyManagement>
