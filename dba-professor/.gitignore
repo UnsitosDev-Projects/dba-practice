@@ -31,8 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-# Ignora shell
-*.sh
-# ingora md
-*.md
