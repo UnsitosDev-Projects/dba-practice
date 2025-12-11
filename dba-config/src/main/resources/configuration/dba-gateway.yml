@@ -1,0 +1,17 @@
+server: 
+  port: 8080
+spring: 
+  config:
+    import: optional:configserver:http://localhost:8888
+  application:
+    name: dba-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: dba-professor-id
+          uri: http:localhost:9090
+          predicates:
+            - Path=/dba/api/v1/professor
