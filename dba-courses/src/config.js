@@ -1,23 +1,30 @@
 const Eureka = require('eureka-js-client').Eureka;
 
+// Configuración local
+const APP_NAME = 'dba-courses';
+const APP_PORT = parseInt(process.env.APP_PORT || '8002');
+const EUREKA_HOST = process.env.EUREKA_HOST || 'localhost';
+const EUREKA_PORT = parseInt(process.env.EUREKA_PORT || '8761');
+const ENABLE_EUREKA = process.env.ENABLE_EUREKA !== 'false';
+
 const eurekaConfig = {
   instance: {
-    app: 'dba-courses',
+    app: APP_NAME,
     hostName: 'localhost',
     ipAddr: '127.0.0.1',
     port: {
-      '$': 8002,
+      '$': APP_PORT,
       '@enabled': true,
     },
-    vipAddress: 'dba-courses',
+    vipAddress: APP_NAME,
     dataCenterInfo: {
       '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
       name: 'MyOwn',
     },
   },
   eureka: {
-    host: process.env.EUREKA_HOST || 'localhost',
-    port: process.env.EUREKA_PORT || 8761,
+    host: EUREKA_HOST,
+    port: EUREKA_PORT,
     servicePath: '/eureka/apps/',
     maxRetries: 3,
     requestRetryDelay: 500,
@@ -27,7 +34,7 @@ const eurekaConfig = {
 const client = new Eureka(eurekaConfig);
 
 const startEureka = () => {
-  if (process.env.ENABLE_EUREKA === 'true') {
+  if (ENABLE_EUREKA) {
     client.start((error) => {
       if (error) {
         console.error('Error al conectar con Eureka:', error);
@@ -41,10 +48,10 @@ const startEureka = () => {
 };
 
 const stopEureka = () => {
-  if (process.env.ENABLE_EUREKA === 'true') {
+  if (ENABLE_EUREKA) {
     client.stop();
     console.log('Microservicio dba-courses des-registrado de Eureka');
   }
 };
 
-module.exports = { startEureka, stopEureka };
+module.exports = { startEureka, stopEureka, APP_PORT };

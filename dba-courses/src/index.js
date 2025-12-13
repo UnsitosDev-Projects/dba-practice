@@ -1,9 +1,8 @@
 const express = require('express');
 require('dotenv').config();
-const { startEureka, stopEureka } = require('./config');
+const { startEureka, stopEureka, APP_PORT } = require('./config');
 
 const app = express();
-const PORT = process.env.PORT || 8002;
 
 app.use(express.json());
 
@@ -45,8 +44,8 @@ app.get('/api/courses/:id', (req, res) => {
 });
 
 // Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto http://localhost:${PORT}`);
+app.listen(APP_PORT, () => {
+  console.log(`Servidor corriendo en puerto http://localhost:${APP_PORT}`);
   startEureka();
 });
 
