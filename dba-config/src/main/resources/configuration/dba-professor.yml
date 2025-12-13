@@ -5,18 +5,13 @@ spring:
     name: dba-professor
   config: 
     import: optional:configserver:http://localhost:8888
-    # SptingData
-    # Cambiar a mermcached
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/bd
-    username: username
-    password: password
-  jpa:
-    hibernate:
-      ddl-auto: create
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  # Configuración de Memcached
+  cache:
+    type: memcached
+memcached:
+  servers: localhost:11211
+  protocol: binary
+  operation-timeout: 3000
 # Conexión con Eureka
 eureka: 
   instance:
