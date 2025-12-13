@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.config import lifespan, APP_NAME, APP_PORT
-from controller.StudentController import router as student_router
+from app.controller.StudentController import router as student_router
 
 app = FastAPI(
     title="dba-students",
