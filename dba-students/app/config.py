@@ -2,12 +2,12 @@ import os
 from contextlib import asynccontextmanager
 import py_eureka_client.eureka_client as eureka_client
 
-# Configuración desde variables de entorno o valores por defecto
-EUREKA_SERVER = os.getenv("EUREKA_SERVER", "http://localhost:8761/eureka")
+# Configuración local
 APP_NAME = os.getenv("APP_NAME", "dba-students")
 APP_PORT = int(os.getenv("APP_PORT", "8001"))
 INSTANCE_HOST = os.getenv("INSTANCE_HOST", "localhost")
-ENABLE_EUREKA = os.getenv("ENABLE_EUREKA", "false").lower() == "true"
+EUREKA_SERVER = os.getenv("EUREKA_SERVER", "http://localhost:8761/eureka")
+ENABLE_EUREKA = os.getenv("ENABLE_EUREKA", "true").lower() == "true"
 
 @asynccontextmanager
 async def lifespan(app):
