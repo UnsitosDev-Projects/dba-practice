@@ -28,8 +28,7 @@ async def health():
 
 if __name__ == "__main__":
     uvicorn.run(
-        APP_NAME,
+        app,
         host="0.0.0.0",
-        port=APP_PORT,
-        reload=True
+        port=APP_PORT
     )
