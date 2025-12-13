@@ -28,12 +28,47 @@ El proyecto está compuesto por los siguientes módulos:
 > [!IMPORTANT]
 > El servidor Eureka (`dba-eureka`) debe iniciarse primero antes que los demás servicios para que puedan registrarse correctamente.
 
+## Inicio Rápido 🚀
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/UnsitosDev-Projects/dba-practice.git
+cd dba-practice
+
+# 2. Compilar proyecto Java (en directorio raíz)
+mvn clean install
+
+# 3. Iniciar Eureka (Terminal 1)
+cd dba-eureka && mvn spring-boot:run
+
+# 4. Iniciar Gateway (Terminal 2)
+cd dba-gateway && mvn spring-boot:run
+
+# 5. Iniciar Students (Terminal 3)
+cd dba-students && python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8001
+
+# 6. Iniciar Courses (Terminal 4)
+cd dba-courses && npm install && npm start
+
+# 7. Iniciar Professor (Terminal 5)
+cd dba-professor && mvn spring-boot:run
+
+# 8. Verificar en el navegador
+# http://localhost:8761 (Eureka Dashboard)
+# http://localhost:8080/api/students (Students via Gateway)
+# http://localhost:8080/api/courses (Courses via Gateway)
+```
+
 ## Requisitos Previos
 
 Antes de clonar y ejecutar este proyecto, asegúrate de tener instalado:
 
-- **Java JDK 17** o superior
+- **Java JDK 21** o superior
 - **Maven 3.6+**
+- **Python 3.8+**
+- **Node.js 18+**
 - **Git**
 
 > [!TIP]
@@ -41,6 +76,9 @@ Antes de clonar y ejecutar este proyecto, asegúrate de tener instalado:
 > ```bash
 > java -version
 > mvn -version
+> python --version
+> node --version
+> npm --version
 > git --version
 > ```
 
@@ -77,28 +115,66 @@ Este comando descargará todas las dependencias necesarias y compilará cada mic
 
 ### Orden de Inicio Recomendado
 
-1. **Servidor Eureka** (Servicio de descubrimiento)
-   ```bash
-   cd dba-eureka
-   mvn spring-boot:run
-   ```
-   
-   Verifica que esté corriendo accediendo a: `http://localhost:8761`
+**IMPORTANTE:** Debes iniciar los servicios en este orden específico:
 
-2. **Servidor de Configuración**
-   ```bash
-   cd dba-config
-   mvn spring-boot:run
-   ```
+#### 1. Servidor Eureka (Servicio de descubrimiento) - Puerto 8761
+```bash
+cd dba-eureka
+mvn spring-boot:run
+```
+Verifica que esté corriendo accediendo a: `http://localhost:8761`
 
-3. **API Gateway**
-   ```bash
-   cd dba-gateway
-   mvn spring-boot:run
-   ```
+#### 2. API Gateway - Puerto 8080
+```bash
+cd dba-gateway
+mvn spring-boot:run
+```
+
+#### 3. Microservicio de Students (Python/FastAPI) - Puerto 8001
+```bash
+cd dba-students
+source venv/bin/activate  # Linux/Mac
+# o venv\Scripts\activate en Windows
+uvicorn app.main:app --host 0.0.0.0 --port 8001
+```
+
+#### 4. Microservicio de Courses (Node.js/Express) - Puerto 8002
+```bash
+cd dba-courses
+npm start
+```
+
+#### 5. Microservicio de Professor (Java/Spring Boot) - Puerto 9090
+```bash
+cd dba-professor
+mvn spring-boot:run
+```
 
 > [!TIP]
-> Puedes ejecutar cada servicio en terminales separadas para monitorear los logs de forma independiente.
+> Ejecuta cada servicio en una terminal separada para monitorear los logs independientemente.
+
+### Probar los Microservicios a través del Gateway
+
+Una vez que todos los servicios estén corriendo, puedes acceder a ellos a través del Gateway:
+
+```bash
+# Students
+curl http://localhost:8080/api/students
+curl http://localhost:8080/api/students/1
+
+# Courses
+curl http://localhost:8080/api/courses
+curl http://localhost:8080/api/courses/1
+
+# Professors
+curl http://localhost:8080/api/professors
+curl http://localhost:8080/api/professors/1
+```
+
+O desde el navegador:
+- http://localhost:8080/api/students
+- http://localhost:8080/api/courses
+- http://localhost:8080/api/professors
 
 ## Verificación de los Servicios
 
@@ -118,24 +194,42 @@ Deberías ver todos los servicios registrados en la sección "Instances currentl
 ```
 dba-practice/
 ├── pom.xml                 # POM padre con configuración compartida
-├── dba-eureka/            # Servidor de descubrimiento
+├── dba-eureka/            # Servidor de descubrimiento (Puerto 8761)
 │   ├── src/
 │   └── pom.xml
-├── dba-gateway/           # API Gateway
+├── dba-gateway/           # API Gateway (Puerto 8080)
 │   ├── src/
 │   └── pom.xml
-└── dba-config/            # Servidor de configuración
+├── dba-config/            # Servidor de configuración (Puerto 8888)
+│   ├── src/
+│   └── pom.xml
+├── dba-students/          # Microservicio Python/FastAPI (Puerto 8001)
+│   ├── app/
+│   ├── requirements.txt
+│   └── README.md
+├── dba-courses/           # Microservicio Node.js/Express (Puerto 8002)
+│   ├── src/
+│   ├── package.json
+│   └── README.md
+└── dba-professor/         # Microservicio Java/Spring Boot (Puerto 9090)
     ├── src/
     └── pom.xml
 ```
 
 ## Tecnologías Utilizadas
 
-- **Spring Boot** - Framework principal
+### Infraestructura
+- **Spring Boot 3.3.5** - Framework principal para servicios Java
 - **Spring Cloud Netflix Eureka** - Servidor de descubrimiento de servicios
 - **Spring Cloud Gateway** - API Gateway
 - **Spring Cloud Config** - Configuración centralizada
 - **Maven** - Gestión de dependencias y construcción
+
+### Microservicios
+- **Python 3.x + FastAPI** - Microservicio de Students
+- **Node.js 18+ + Express** - Microservicio de Courses
+- **Java 21 + Spring Boot** - Microservicio de Professor
+- **Memcached** - Sistema de caché para Professor service
 
 ## Solución de Problemas
 
