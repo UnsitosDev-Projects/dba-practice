@@ -8,9 +8,7 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
-
 app.include_router(student_router, prefix="/api/students", tags=["Estudiantes"])
-
 @app.get("/")
 async def root():
     return {
