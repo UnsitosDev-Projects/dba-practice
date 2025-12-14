@@ -11,6 +11,27 @@ spring:
             discovery:
                 locator:
                     enabled: true
+            default-filters:
+                - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+            globalcors:
+                cors-configurations:
+                    '[/**]':
+                        allowedOrigins:
+                            - "http://localhost:4200"
+                            - "http://localhost:3000"
+                            - "http://localhost:8100"
+                            - "http://localhost"
+                            - "http://127.0.0.1"
+                        allowedMethods:
+                            - GET
+                            - POST
+                            - PUT
+                            - DELETE
+                            - OPTIONS
+                            - PATCH
+                        allowedHeaders: "*"
+                        allowCredentials: true
+                        maxAge: 3600
             routes:
                 - id: dba-professor-id
                   uri: lb://DBA-PROFESSOR
