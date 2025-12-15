@@ -1,4 +1,4 @@
-# Memcached Example with Professor Service
+# Memcached Example with Professor Service - Eleazar
 
 This example demonstrates how to use Memcached for caching with the Professor entity in a Spring Boot application.
 
