@@ -1,5 +1,13 @@
 # DBA Practice - Microservicios
 
+## Gestores
+- **Redis**. Joan Manuel Abeldaño
+- **Amazon DynamoDB**. Manuel Alejandro Pinacho Hernández
+- **Memcached**. Eleazar Jarquín Ramos
+- **Riak**. Hugo Nicolás Aragón Maya
+- **Etcd**. Daniel Bernardino Reyes Nolasco
+Cada gestor es un microserivicio diferente.
+
 Proyecto de práctica basado en arquitectura de microservicios utilizando Spring Boot y Netflix Eureka como servidor de descubrimiento de servicios.
 
 > [!IMPORTANT]
