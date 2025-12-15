@@ -9,9 +9,9 @@ spring:
       enabled: false
 
 memcached:
-  servers: localhost:11211
-  protocol: binary
-  operation-timeout: 3000
+  host: ${MEMCACHED_HOST:localhost}
+  port: ${MEMCACHED_PORT:11211}
+  expiration: 3600
 
 eureka:
   instance:
