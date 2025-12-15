@@ -32,12 +32,11 @@ El proyecto está compuesto por los siguientes módulos:
 |--------|-------------|--------|
 | `dba-eureka` | Servidor de descubrimiento de servicios (Eureka Server) | 8761 |
 | `dba-gateway` | API Gateway para enrutamiento de peticiones | 8080 |
-| `dba-config` | Servidor de configuración centralizada | 8888 |
 
 > [!IMPORTANT]
 > El servidor Eureka (`dba-eureka`) debe iniciarse primero antes que los demás servicios para que puedan registrarse correctamente.
 
-## Inicio Rápido 🚀
+## Inicio Rápido 
 
 ```bash
 # 1. Clonar el repositorio
@@ -209,9 +208,6 @@ dba-practice/
 ├── dba-gateway/           # API Gateway (Puerto 8080)
 │   ├── src/
 │   └── pom.xml
-├── dba-config/            # Servidor de configuración (Puerto 8888)
-│   ├── src/
-│   └── pom.xml
 ├── dba-students/          # Microservicio Python/FastAPI (Puerto 8001)
 │   ├── app/
 │   ├── requirements.txt
@@ -231,7 +227,6 @@ dba-practice/
 - **Spring Boot 3.3.5** - Framework principal para servicios Java
 - **Spring Cloud Netflix Eureka** - Servidor de descubrimiento de servicios
 - **Spring Cloud Gateway** - API Gateway
-- **Spring Cloud Config** - Configuración centralizada
 - **Maven** - Gestión de dependencias y construcción
 
 ### Microservicios
